@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Apu"
+             xmlns:converters="clr-namespace:Apu.Converters"
+             x:Class="Apu.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SunConverter x:Key="SunConverter" />
+            <converters:IconConverter x:Key="IconConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Ajouter aux favoris" Clicked="AddFavoriteClicked" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout >
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="40">
+            <Button Image="geo.png"  WidthRequest="35" HeightRequest="35" Clicked="BtnGeoClicked"/>
+            <Entry x:Name="EntryCity" Placeholder="Saisir une ville" />
+            <Button Text="OK" Clicked="BtnSearchClicked" />
+        </StackLayout>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Image Source="{Binding Icon, Converter={StaticResource IconConverter}}" WidthRequest="60" HeightRequest="30" />
+                <Label XAlign="Center" Text="{Binding City}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" />
+            </StackLayout>
+
+            <Label XAlign="Center" Text="Température" Grid.Column="0" Grid.Row="1" />
+            <Label XAlign="Center" Text="{Binding Temperature}" Grid.Column="1" Grid.Row="1" />
+
+            <Label XAlign="Center" Text="Vent" Grid.Column="0" Grid.Row="2" />
+            <Label XAlign="Center" Text="{Binding Wind}" Grid.Column="1" Grid.Row="2" />
+
+            <Label XAlign="Center" Text="Humidité" Grid.Column="0" Grid.Row="3" />
+            <Label XAlign="Center" Text="{Binding Humidity}" Grid.Column="1" Grid.Row="3" />
+
+            <Label XAlign="Center" Text="Soleil" Grid.Column="0" Grid.Row="4" />
+            <Label XAlign="Center" Text="{Binding Sun, Converter={StaticResource SunConverter}}" Grid.Column="1" Grid.Row="4" />
+
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>
